@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startSpeechRecognize() {
+        setText("************开始录音************");
         stopSpeechRecognize();
         long session = newSessionId();
         mVoiceRecord.startRecord(session);
@@ -63,9 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void stopSpeechRecognize() {
-        if (mVoiceRecord != null) {
-            mVoiceRecord.stopRecord();
-        }
+        mVoiceRecord.stopRecord();
         mCore.getSpeechRecognizer().cancel();
     }
 
@@ -152,8 +151,8 @@ public class MainActivity extends AppCompatActivity {
 
         // 自定义上下文
         Map<String, String> stateList = new HashMap<>();
-        // TO-DO 增加景区标识
-        stateList.put("spotLabel", "sotContent");
+        // TO-DO 增加自定义标识
+        stateList.put("spotLabel", "spotContent");
         contexts.add(TVSContextFactory.createTvsCustomDataContext(stateList));
 
         // 创建语义理解Event
@@ -204,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
 
         recordingButton.setOnClickListener(v -> {
             // 开始语音识别
-            setText("************开始录音************");
+
             startSpeechRecognize();
         });
 
@@ -253,12 +252,14 @@ public class MainActivity extends AppCompatActivity {
             public void onRecordCreateError(long session) {
                 Logger.i(TAG, "onRecordCreateError " + session);
                 stopSpeechRecognize(session);
+                setText("************录音出错************");
             }
 
             @Override
             public void onRecordingFailed(long session) {
                 Logger.i(TAG, "onRecordingFailed " + session);
                 stopSpeechRecognize(session);
+                setText("************录音出错************");
             }
 
             @Override
@@ -266,6 +267,7 @@ public class MainActivity extends AppCompatActivity {
                 // 录制结束，发送end标识
                 Logger.i(TAG, "onRecordingEnd " + session);
                 mCore.getSpeechRecognizer().writeAudio(session, null, 0, true);
+                setText("************录音结束************");
             }
         };
 
