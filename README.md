@@ -103,7 +103,9 @@ private void onRecvDirectives(TVSDirectives directives) {
 TVS协议可以参考如下路径中的文档：
 
 [协议介绍](https://github.com/TencentDingdang/tvs-tools/blob/master/doc/AVS兼容API方案介绍.md)
+
 [协议内容](https://github.com/TencentDingdang/tvs-tools/blob/master/doc/AVS%E5%85%BC%E5%AE%B9API%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3.md)
+
 [补充协议](https://github.com/TencentDingdang/tvs-tools/tree/master/Tvs%20Protocol)
 
 如果不想使用JSON转java类的方式解析指令，可以在onRecvUnknownDirectives中直接对JSON字符串进行解析处理；
