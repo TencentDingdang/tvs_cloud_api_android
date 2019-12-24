@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView resultView;
     private Button recordingButton;
     private Button sendNLPButton;
+    private Button stopRecordingButton;
     private ScrollView mScrollView;
 
     private ITVSCoreAPI mCore;
@@ -198,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
         resultView = findViewById(R.id.text_result);
         recordingButton = findViewById(R.id.recording);
         sendNLPButton = findViewById(R.id.textreco);
-
+        stopRecordingButton = findViewById(R.id.stop_record);
         mScrollView = findViewById(R.id.scroller);
 
         recordingButton.setOnClickListener(v -> {
@@ -211,6 +212,11 @@ public class MainActivity extends AppCompatActivity {
             // 开始语义理解
             setText("************语义理解：" + mASRResult + "************");
             sendNLP(mASRResult);
+        });
+
+        stopRecordingButton.setOnClickListener(v -> {
+            setText("************主动结束录音************");
+            stopRecording(getCurrentSessionId());
         });
 
         mCore = new TVSCoreAPI();
